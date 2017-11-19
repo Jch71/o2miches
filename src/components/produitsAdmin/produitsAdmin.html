@@ -1,0 +1,83 @@
+<h1>Liste des produits</h1>
+
+
+<form novalidate>
+  <div class="form-group">
+    <label for="titre">Titre de l'article</label>
+    <input type="text" class="form-control" id="titre"  placeholder="Titre de l'article" ng-model="$ctrl.itemToAdd.title">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" class="form-control" id="description"  placeholder="Description" ng-model="$ctrl.itemToAdd.description">
+  </div>
+  <div class="form-group">
+    <label for="url">Url de l'image</label>
+    <input type="text" class="form-control" id="url"  placeholder="url" ng-model="$ctrl.itemToAdd.image_url">
+  </div>
+
+  <div class="form-group">
+   					<label for="type">type de produit</label>
+					  <select class="form-control" id="type" ng-model="$ctrl.itemToAdd.type">
+					    <option value="1">option 1</option>
+					    <option value="2">option 2</option>
+					    <option value="3">option 3</option>
+					    <option value="4">option 4</option>
+					  </select>
+					</div>
+  <button type="button" class="btn btn-primary" ng-click="$ctrl.addItem()" ng-show="$ctrl.isAddingItem">Ajouter</button>
+</form>
+
+<div class="list-produits">
+	<ul > 
+		<li class="item-list-produits row" ng-repeat="item in $ctrl.listObjects">
+			<img src="{{item.image_url}}" class="img-rounded col-sm-4" ng-if="item.image_url != ''">
+			<div class="col-sm-6">
+				<div class="item-id">
+				{{item.ID}}	
+				</div>
+				 <div class="item-title">
+				 	{{item.title}}
+				 </div>
+				 <div class="item-description">
+				 	{{item.description}}	
+				 </div>
+				 <div class="item-type">
+				 	{{item.type}}	
+				 </div>
+			
+			</div>
+			<div class="col-sm-2 pull-right">
+				<button class="btn btn-primary btn-delete" ng-click="$ctrl.deleteItem(item)">Supprimer</button>
+				<button class="btn btn-secondary btn-edit" ng-click="$ctrl.setEditItem(item)">Modifier</button>
+			</div>
+
+			 <form novalidate ng-show="item.isEditing" class="col-sm-12">
+				  <div class="form-group">
+				    <label for="titre">Titre de l'article</label>
+				    <input type="text" class="form-control" id="titre"  placeholder="Titre de l'article" ng-model="$ctrl.itemToEdit.title">
+				  </div>
+				  <div class="form-group">
+				    <label for="description">Description</label>
+				    <input type="text" class="form-control" id="description"  placeholder="Description" ng-model="$ctrl.itemToEdit.description">
+				  </div>
+				  <div class="form-group">
+				    <label for="url">Url de l'image</label>
+				    <input type="text" class="form-control" id="url"  placeholder="url" ng-model="$ctrl.itemToEdit.image_url">
+				  </div>
+
+				  <div class="form-group">
+   					<label for="type">type de produit</label>
+					  <select class="form-control" id="type" ng-model="$ctrl.itemToEdit.type">
+					    <option value="1">option 1</option>
+					    <option value="2">option 2</option>
+					    <option value="3">option 3</option>
+					    <option value="4">option 4</option>
+					  </select>
+					</div>
+
+				  <button type="button" class="btn btn-primary" ng-click="item.isEditing = false">Annuler l'édition</button>
+				  <button type="button" class="btn btn-primary" ng-click="$ctrl.editItem()">Editer</button>
+			  </form>
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,22 @@
+.item-list-produits{
+	list-style: none;
+	margin: 5px 0;
+	border: solid 1px lightgrey;
+	padding: 5px;
+	position: relative;
+	.item-title{
+		font-weight: bold;
+	}
+	.item-id{
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0.4;
+	}
+	.btn-delete, .btn-edit{
+		width: 100%;
+	}
+	.btn-delete{
+		margin-bottom: 10px;
+	}
+}
