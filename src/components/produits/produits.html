@@ -2,8 +2,8 @@
 <div class="list-produits">
 	<ul > 
 		<li class="item-list-produits row" ng-repeat="item in $ctrl.listObjects">
-			<img src="{{item.image_url}}" class="img-rounded col-sm-4" ng-if="item.image_url != ''">
-			<div class="col-sm-8">
+			<img src="{{item.image_url}}" class="img-rounded col-md-4 col-md-offset-0 img-responsive col-xs-8 col-xs-offset-2" ng-if="item.image_url != ''">
+			<div class="col-md-8 col-xs-12">
 				 <div class="item-title">
 				 	{{item.title}}
 				 </div>
@@ -11,9 +11,8 @@
 				 	{{item.description}}	
 				 </div>
 				 <div class="item-type">
-				 	{{item.type}}	
+				 	{{$ctrl.getItemTypeText(item.type)}}
 				 </div>
-			
 			</div>
 		</li>
 	</ul>

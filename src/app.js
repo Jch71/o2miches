@@ -12,7 +12,9 @@ import AngularBootstrap from 'angular-ui-bootstrap';
 import LocalStorageModule from 'angular-local-storage';
 /*eslint-enable */
 import AppCore from './core';
-import { AppComponent } from './app.component';
+import {
+    AppComponent
+} from './app.component';
 
 import MainTemplate from './components/mainTemplate';
 import Produits from './components/produits';
@@ -20,63 +22,64 @@ import Produits from './components/produits';
 import Presentation from './components/presentation';
 import ProduitsAdmin from './components/produitsAdmin';
 
-const appName = 'myApp'; 
+const appName = 'myApp';
 
 angular.module(appName, [
-  // framework wide components
-  AngularUiRouter,
-  AngularAnimate,
-  AngularSanitize,
-  AngularBootstrap,
+        // framework wide components
+        AngularUiRouter,
+        AngularAnimate,
+        AngularSanitize,
+        AngularBootstrap,
 
-  // services
-  'LocalStorageModule',
-  AppCore, 
+        // services
+        'LocalStorageModule',
+        AppCore,
 
-  // ui-components
-  MainTemplate, 
-  Produits, 
-  Presentation, 
-  ProduitsAdmin
-])
-.config(config)
-.component(AppComponent.selector, AppComponent);
+        // ui-components
+        MainTemplate,
+        Produits,
+        Presentation,
+        ProduitsAdmin
+    ])
+    .config(config)
+    .component(AppComponent.selector, AppComponent);
 
 /* @ngInject */
-function config ($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
+function config($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
 
-  localStorageServiceProvider.setPrefix(appName);
+    localStorageServiceProvider.setPrefix(appName);
 
-  $stateProvider
-    .state('mainTemplate', {
-      url: '/',
-      abstract:true,
-      component: 'mainTemplate'
-    })
-    .state('mainTemplateAdmin', {
-      url: '/admin/',
-      abstract:true,
-      component: 'mainTemplateAdmin'
-    })
-    .state('produitsAdmin', {
-      url: 'produitsAdmin',
-      component: 'produitsAdmin',
-      parent : 'mainTemplate'
-    })
-    .state('produits', {
-      url: 'produits',
-      component: 'produits',
-      parent : 'mainTemplate'
-    })
-    .state('presentation', {
-      url: 'presentation',
-      component: 'presentation',
-      parent : 'mainTemplate'
-    });
+    $stateProvider
+        .state('mainTemplate', {
+            url: '/',
+            abstract: true,
+            component: 'mainTemplate'
+        })
+        .state('mainTemplateAdmin', {
+            url: '/admin/',
+            abstract: true,
+            component: 'mainTemplateAdmin'
+        })
+        .state('produitsAdmin', {
+            url: 'produitsAdmin',
+            component: 'produitsAdmin',
+            parent: 'mainTemplate'
+        })
+        .state('produits', {
+            url: 'produits/:typeList',
+            component: 'produits',
+            parent: 'mainTemplate'
 
-  $urlRouterProvider.otherwise('/presentation');
+        })
+        .state('presentation', {
+            url: 'presentation',
+            component: 'presentation',
+            parent: 'mainTemplate'
+        });
+
+    $urlRouterProvider.otherwise('/presentation');
 }
 
 angular.element(document).ready(() => {
-  angular.bootstrap(document, [appName]);
+    angular.bootstrap(document, [appName]);
 });
