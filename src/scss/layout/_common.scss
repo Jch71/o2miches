@@ -20,3 +20,9 @@ body:after {
 .jumbotron{
 	background : none;
 }
+
+.btn{
+	&.btn-secondary{
+		border-color : lightgrey;
+	}
+}
