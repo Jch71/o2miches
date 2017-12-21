@@ -1,4 +1,5 @@
 <h1>Admin Liste des produits</h1>
+<a ui-sref="packsAdmin" class="btn btn-primary">Gestion des packs</a>
 <form novalidate class="form-add">
     <div class="form-group">
         <label for="titre">Titre de l'article</label>
@@ -6,7 +7,12 @@
     </div>
     <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" placeholder="Description" ng-model="$ctrl.itemToAdd.description">
+        <textarea  class="form-control" id="description" placeholder="Description" ng-model="$ctrl.itemToAdd.description">
+        </textarea>
+    </div>
+    <div class="form-group">
+        <label for="description">Prix</label>
+        <input type="number" class="form-control" id="prix" placeholder="prix" ng-model="$ctrl.itemToAdd.PRIX">
     </div>
     <div class="form-group">
         <label for="url">Url de l'image</label>
@@ -15,10 +21,13 @@
     <div class="form-group">
         <label for="type">type de produit</label>
         <select class="form-control" id="type" ng-model="$ctrl.itemToAdd.type">
-            <option value="1">option 1</option>
-            <option value="2">option 2</option>
-            <option value="3">option 3</option>
-            <option value="4">option 4</option>
+            <option value="">Tous</option>
+            <option value="1">Structures gonflables</option>
+            <option value="2">Mascottes</option>
+            <option value="3">Jeux de kermesse</option>
+            <option value="4">Appareils sucré salé</option>
+            <option value="5">Pack</option>
+            <option value="6">Animation</option>
         </select>
     </div>
     <button type="button" class="btn btn-primary" ng-click="$ctrl.addItem()">Ajouter</button>
@@ -28,17 +37,17 @@
         <li class="item-list-produits row item-added">
             <img src="{{$ctrl.itemToAdd.image_url}}" class="img-rounded col-md-4 col-md-offset-0 img-responsive col-xs-8 col-xs-offset-2" ng-hide="$ctrl.itemToAdd.image_url == null || $ctrl.itemToAdd.image_url == '' ">
             <div class="col-md-6 col-xs-10">
-                <div class="item-id">
-                    {{item.ID}}
+                <div class="item-prix">
+                    {{$ctrl.itemToAdd.PRIX}}
                 </div>
-                <div class="item-title">
+                <h3 class="item-title">
                     {{$ctrl.itemToAdd.title}}
-                </div>
-                <div class="item-description">
-                    {{$ctrl.itemToAdd.description}}
+                </h3>
+                <div class="item-description" ng-bind-html="$ctrl.itemToAdd.description | linebreaks">
+                    
                 </div>
                 <div class="item-type">
-                    {{$ctrl.itemToAdd.type}}
+                    {{$ctrl.getItemTypeText($ctrl.itemToAdd.type)}}
                 </div>
             </div>
         </li>
@@ -50,11 +59,13 @@
     <div class="form-group">
         <label for="searchType">type de produit</label>
         <select class="form-control" id="searchType" ng-model="search.type">
-        	<option value="">Tous</option>
-            <option value="1">option 1</option>
-            <option value="2">option 2</option>
-            <option value="3">option 3</option>
-            <option value="4">option 4</option>
+            <option value="">Tous</option>
+            <option value="1">Structures gonflables</option>
+            <option value="2">Mascottes</option>
+            <option value="3">Jeux de kermesse</option>
+            <option value="4">Appareils sucré salé</option>
+            <option value="5">Pack</option>
+            <option value="6">Animation</option>
         </select>
     </div>
 </div>
@@ -62,21 +73,24 @@
     <ul>
         <li class="item-list-produits row" ng-repeat="item in $ctrl.listObjects | filter:search.text | filter:{type : search.type}">
             <img src="{{item.image_url}}" class="img-rounded col-md-4 col-md-offset-0 img-responsive col-xs-8 col-xs-offset-2" ng-if="item.image_url != ''">
-            <div class="col-md-6 col-xs-10">
+            <div class="col-md-6 col-xs-12">
                 <div class="item-id">
                     {{item.ID}}
                 </div>
-                <div class="item-title">
+                <h2 class="item-title">
                     {{item.title}}
+                </h2>
+                <div class="item-prix">
+                    {{item.PRIX}}
                 </div>
-                <div class="item-description">
-                    {{item.description}}
+                <div class="item-description" ng-bind-html="$ctrl.item.description | linebreaks">
+                    
                 </div>
                 <div class="item-type">
-                    {{item.type}}
+                    {{$ctrl.getItemTypeText(item.type)}}
                 </div>
             </div>
-            <div class="col-xs-2 pull-right">
+            <div class="col-xs-12 col-md-2 pull-right">
                 <button class="btn btn-primary btn-delete" ng-click="$ctrl.deleteItem(item)">Supprimer</button>
                 <button class="btn btn-secondary btn-edit" ng-click="$ctrl.setEditItem(item)">Modifier</button>
             </div>
@@ -86,8 +100,13 @@
                     <input type="text" class="form-control" id="titre" placeholder="Titre de l'article" ng-model="$ctrl.itemToEdit.title">
                 </div>
                 <div class="form-group">
-                    <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" placeholder="Description" ng-model="$ctrl.itemToEdit.description">
+        <label for="description">Description</label>
+        <textarea  class="form-control" id="description" placeholder="Description" ng-model="$ctrl.itemToAdd.description">
+        </textarea>
+    </div>
+                <div class="form-group">
+                    <label for="description">Prix</label>
+                    <input type="number" class="form-control" id="prix" placeholder="prix" ng-model="$ctrl.itemToEdit.PRIX">
                 </div>
                 <div class="form-group">
                     <label for="url">Url de l'image</label>
@@ -96,10 +115,13 @@
                 <div class="form-group">
                     <label for="type">type de produit</label>
                     <select class="form-control" id="type" ng-model="$ctrl.itemToEdit.type">
-                        <option value="1">option 1</option>
-                        <option value="2">option 2</option>
-                        <option value="3">option 3</option>
-                        <option value="4">option 4</option>
+                        <option value="">Tous</option>
+                        <option value="1">Structures gonflables</option>
+                        <option value="2">Mascottes</option>
+                        <option value="3">Jeux de kermesse</option>
+                        <option value="4">Appareils sucré salé</option>
+                        <option value="5">Pack</option>
+                        <option value="6">Animation</option>
                     </select>
                 </div>
                 <button type="button" class="btn btn-primary" ng-click="item.isEditing = false">Annuler l'édition</button>

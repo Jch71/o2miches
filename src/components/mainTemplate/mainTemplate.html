@@ -14,15 +14,29 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li ui-sref-active="active"><a ui-sref="presentation">Accueil</a></li>
-              <li ui-sref-active="active"> <a href="#">Contact</a></li>
+              <li ui-sref-active="active"> <a ui-sref="contact">Contact</a></li>
               <li ui-sref-active="active" class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nos produits <span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Location<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a ui-sref="produits({'typeList':0})">Tous les produits</a></li>
                   <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a ui-sref="produits({'typeList':1})">Produits du type 1</a></li>
-                  <li><a ui-sref="produits({'typeList':2})">Produits du type 2</a></li>
+                  <li class="dropdown-header">Par catégorie</li>
+                  <li><a ui-sref="produits({'typeList':1})">Structures gonflables</a></li>
+                  <li><a ui-sref="produits({'typeList':2})">Mascottes</a></li>
+                  <li><a ui-sref="produits({'typeList':3})">Jeux de kermesse</a></li>
+                  <li><a ui-sref="produits({'typeList':4})">Appareils sucré salé</a></li>
+                  <li><a ui-sref="produits({'typeList':5})">Pack</a></li>
+                  <li><a ui-sref="produits({'typeList':6})">Animation</a></li>
+                </ul>
+              </li>
+              <li ui-sref-active="active" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Packs<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a ui-sref="packs({'minPrix':0})">Tous les packs</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Par prix</li>
+                  <li><a ui-sref="packs({'minPrix':50})">A partir de 50€</a></li>
+                  <li><a ui-sref="packs({'minPrix':75})">A partir de 75€</a></li>
                 </ul>
               </li>
             </ul>

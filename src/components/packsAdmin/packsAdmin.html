@@ -1,0 +1,94 @@
+<h1>Admin Liste des packs</h1>
+<form novalidate class="form-add">
+    <div class="form-group">
+        <label for="titre">Titre du pack</label>
+        <input type="text" class="form-control" id="titre" placeholder="Titre de l'article" ng-model="$ctrl.itemToAdd.title">
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea  class="form-control" id="description" placeholder="Description" ng-model="$ctrl.itemToAdd.description">
+        </textarea>
+    </div>
+    <div class="form-group">
+        <label for="description">Prix</label>
+        <input type="number" class="form-control" id="prix" placeholder="prix" ng-model="$ctrl.itemToAdd.PRIX">
+    </div>
+    <div class="form-group">
+        <label for="url">Url de l'image</label>
+        <input type="text" class="form-control" id="url" placeholder="url" ng-model="$ctrl.itemToAdd.image_url">
+    </div>
+    
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.addItem()">Ajouter</button>
+</form>
+<div class="list-produits" ng-show="$ctrl.itemToAdd.title != null || $ctrl.itemToAdd.description != null || $ctrl.itemToAdd.type != null">
+    <ul>
+        <li class="item-list-produits row item-added">
+            <img src="{{$ctrl.itemToAdd.image_url}}" class="img-rounded col-md-4 col-md-offset-0 img-responsive col-xs-8 col-xs-offset-2" ng-hide="$ctrl.itemToAdd.image_url == null || $ctrl.itemToAdd.image_url == '' ">
+            <div class="col-md-6 col-xs-10">
+                <div class="item-prix">
+                    {{$ctrl.itemToAdd.PRIX}}
+                </div>
+                <h3 class="item-title">
+                    {{$ctrl.itemToAdd.title}}
+                </h3>
+                <div class="item-description" ng-bind-html="$ctrl.itemToAdd.description | linebreaks">
+                    
+                </div>
+                <div class="item-type">
+                    {{$ctrl.getItemTypeText($ctrl.itemToAdd.type)}}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="filters">
+    <label for="search">Filtrer les packs</label>
+    <input type="text" class="form-control" id="search" placeholder="Recherche dans les produits" ng-model="search.text">
+    <input type="number" class="form-control" id="search" placeholder="Recherche dans les prix supérieurs à :" ng-model="search.prix">
+</div>
+<div class="list-produits">
+    <ul>
+        <li class="item-list-produits row" ng-repeat="item in $ctrl.listObjects | filter:search.text | filter:{type : search.type}">
+            <img src="{{item.image_url}}" class="img-rounded col-md-4 col-md-offset-0 img-responsive col-xs-8 col-xs-offset-2" ng-if="item.image_url != ''">
+            <div class="col-md-6 col-xs-12">
+                <div class="item-id">
+                    {{item.ID}}
+                </div>
+                <h2 class="item-title">
+                    {{item.title}}
+                </h2>
+                <div class="item-prix">
+                    {{item.PRIX}}
+                </div>
+                <div class="item-description" ng-bind-html="$ctrl.item.description | linebreaks">
+                    
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-2 pull-right">
+                <button class="btn btn-primary btn-delete" ng-click="$ctrl.deleteItem(item)">Supprimer</button>
+                <button class="btn btn-secondary btn-edit" ng-click="$ctrl.setEditItem(item)">Modifier</button>
+            </div>
+            <form novalidate ng-show="item.isEditing" class="col-sm-12">
+                <div class="form-group">
+                    <label for="titre">Titre de l'article</label>
+                    <input type="text" class="form-control" id="titre" placeholder="Titre de l'article" ng-model="$ctrl.itemToEdit.title">
+                </div>
+                <div class="form-group">
+        <label for="description">Description</label>
+        <textarea  class="form-control" id="description" placeholder="Description" ng-model="$ctrl.itemToAdd.description">
+        </textarea>
+    </div>
+                <div class="form-group">
+                    <label for="description">Prix</label>
+                    <input type="number" class="form-control" id="prix" placeholder="prix" ng-model="$ctrl.itemToEdit.PRIX">
+                </div>
+                <div class="form-group">
+                    <label for="url">Url de l'image</label>
+                    <input type="text" class="form-control" id="url" placeholder="url" ng-model="$ctrl.itemToEdit.image_url">
+                </div>
+                <button type="button" class="btn btn-primary" ng-click="item.isEditing = false">Annuler l'édition</button>
+                <button type="button" class="btn btn-primary" ng-click="$ctrl.editItem()">Editer</button>
+            </form>
+        </li>
+    </ul>
+</div>

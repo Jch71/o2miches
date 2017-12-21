@@ -15,12 +15,15 @@ import AppCore from './core';
 import {
     AppComponent
 } from './app.component';
-
+ 
 import MainTemplate from './components/mainTemplate';
 import Produits from './components/produits';
+import Packs from './components/packs';
 
 import Presentation from './components/presentation';
 import ProduitsAdmin from './components/produitsAdmin';
+import PacksAdmin from './components/packsAdmin';
+import Contact from './components/contact';
 
 const appName = 'myApp';
 
@@ -38,10 +41,18 @@ angular.module(appName, [
         // ui-components
         MainTemplate,
         Produits,
+        Packs,
+        Contact,
         Presentation,
-        ProduitsAdmin
+        ProduitsAdmin,
+        PacksAdmin
     ])
     .config(config)
+    .filter('linebreaks', function() {
+    return function(text) {
+        return text.replace(/\n/g, "<br>");
+    }
+})
     .component(AppComponent.selector, AppComponent);
 
 /* @ngInject */
@@ -65,16 +76,32 @@ function config($stateProvider, $urlRouterProvider, localStorageServiceProvider)
             component: 'produitsAdmin',
             parent: 'mainTemplate'
         })
+         .state('packsAdmin', {
+            url: 'packsAdmin',
+            component: 'packsAdmin',
+            parent: 'mainTemplate'
+        })
+        .state('presentation', {
+            url: 'presentation',
+            component: 'presentation',
+            parent: 'mainTemplate'
+        })
+        .state('contact', {
+            url: 'contact',
+            component: 'contact',
+            parent: 'mainTemplate'
+        })
         .state('produits', {
             url: 'produits/:typeList',
             component: 'produits',
             parent: 'mainTemplate'
 
         })
-        .state('presentation', {
-            url: 'presentation',
-            component: 'presentation',
+         .state('packs', {
+            url: 'packs/:minPrix',
+            component: 'packs',
             parent: 'mainTemplate'
+
         });
 
     $urlRouterProvider.otherwise('/presentation');

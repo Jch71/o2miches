@@ -7,7 +7,7 @@ export let ProduitsAdminComponent = {
     /* @ngInject */
     controller: class ProduitsAdminCtrl {
         /* @ngInject */
-        constructor($state, ApiService, loginService) {
+        constructor($state, $scope, ApiService, loginService) {
             // TODO - constructor arguments that should be available on "this"
             // should be added to the assign object
             Object.assign(this, {
@@ -25,6 +25,34 @@ export let ProduitsAdminComponent = {
             this.ApiService = ApiService;
             this.loadList();
 
+        }
+
+          getItemTypeText(type) {
+            let text;
+            switch (type) {
+                case 1:
+                    text = "Structures gonflables";
+                    break;
+                case 2:
+                    text = "Mascottes";
+                    break;
+                case 3:
+                    text = "Jeux de kermesse";
+                    break;
+                case 4:
+                    text = "Appareils sucré salé";
+                    break;
+                case 5:
+                    text = "Pack";
+                    break;
+                case 6:
+                    text = "Animation";
+                    break;
+                default:
+                    text = null;
+                    break;
+            }
+            return text;
         }
 
         addItem() {
@@ -46,7 +74,6 @@ export let ProduitsAdminComponent = {
                 'table': 'produits',
                 'ID': this.itemToEdit.ID
             }, this.itemToEdit).then((data) => {
-
                 if (data != null) {
                     this.itemToEdit = {};
                     this.loadList();
@@ -55,7 +82,6 @@ export let ProduitsAdminComponent = {
                 }
             });
         }
-
 
         setEditItem(item) {
             this.itemToEdit = item;

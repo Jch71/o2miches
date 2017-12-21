@@ -1,0 +1,12 @@
+textarea{
+	min-width: 100%;
+	max-width: 100%;
+}
+
+a.logo-facebook.fa.fa-facebook-square{
+	font-size: 35px;
+	margin-top: 5px;
+	&:hover, &:visited, &:focus{
+		text-decoration: none;
+	}
+}

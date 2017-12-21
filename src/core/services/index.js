@@ -6,7 +6,6 @@ import LoginService from './login.service.js';
 
 export default angular
     .module('core.services', [
-        // 'LocalStorageModule'
     ])
     .service('ApiService', ApiService)
     .service('loginService', LoginService);

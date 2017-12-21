@@ -29,6 +29,18 @@
             .item-title {
                 font-weight: bold;
             }
+            .item-type{
+                position: absolute;
+                top:0px;
+                left: 5px;
+                color: #AAAAAA;
+            }
+            .item-prix{
+                position: absolute;
+                top: 19px;
+                right : 10px;
+                font-size: 20px;
+            }
             .item-description{
             	word-wrap: break-word;
             }
@@ -48,6 +60,9 @@
             }
             .btn-delete {
                 margin-bottom: 10px;
+            }
+            .img-rounded{
+                border-radius: 10%;
             }
         }
     }

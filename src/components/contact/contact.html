@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Nous contacter</h2>
+        </div>
+        <div class="panel-body">
+            <form ng-submit="$ctrl.submit($ctrl.contactform, $event)" name="$ctrl.contactform" method="post" class="form-horizontal" role="form">
+                <div class="form-group" ng-class="{ 'has-error': $ctrl.contactform.name.$invalid && $ctrl.submitted }">
+                    <label for="name" class="col-lg-2 control-label">Nom</label>
+                    <div class="col-lg-10">
+                        <input ng-model="$ctrl.formData.name" type="text" class="form-control" id="name" name="name" placeholder="Votre nom" required>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': $ctrl.contactform.email.$invalid && $ctrl.submitted }">
+                    <label for="email" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input ng-model="$ctrl.formData.email" type="email" class="form-control" id="email" name="email" placeholder="Votre email" required>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': $ctrl.contactform.subject.$invalid && $ctrl.submitted }">
+                    <label for="inputSubject" class="col-lg-2 control-label">Sujet</label>
+                    <div class="col-lg-10">
+                        <input ng-model="$ctrl.formData.subject" type="text" class="form-control" id="subject" name="subject" placeholder="Sujet du message" required>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': $ctrl.contactform.message.$invalid && $ctrl.submitted }">
+                    <label for="message" class="col-lg-2 control-label">Message</label>
+                    <div class="col-lg-10">
+                        <textarea ng-model="$ctrl.formData.message" class="form-control" rows="4" id="message" name="message" placeholder="Votre message..." required></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-default" ng-disabled="$ctrl.submitButtonDisabled">
+                            Envoyer
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <p ng-class="$ctrl.result" style="padding: 15px; margin: 0;">{{ $ctrl.resultMessage }}</p>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <strong>
+        Ou visitez notre page facebook</strong>
+        <div>
+           <a href="https://www.facebook.com/O2miches-locations-et-%C3%A9v%C3%A9nementiels-149568815253675/" class="logo-facebook fa fa-facebook-square"></a>
+    </div>
+</div>
+
+</div>

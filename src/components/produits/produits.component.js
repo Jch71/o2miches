@@ -34,49 +34,27 @@ export let ProduitsComponent = {
 
         }
 
-        addItem() {
-            this.ApiService.callApi('POST', {
-                'table': 'produits'
-            }, this.itemToAdd).then((data) => {
-                console.log(data);
-                if (data != null) {
-                    this.itemToAdd = {};
-                    this.loadList();
-                }
-            });
-        }
-
-
-        editItem() {
-            console.log(this.itemToEdit);
-            this.ApiService.callApi('PUT', {
-                'table': 'produits',
-                'ID': this.itemToEdit.ID
-            }, this.itemToEdit).then((data) => {
-
-                if (data != null) {
-                    this.itemToEdit = {};
-                    this.loadList();
-                    this.isAddingItem = true;
-                    this.isEditingItem = false;
-                }
-            });
-        }
 
         getItemTypeText(type) {
             let text;
             switch (type) {
                 case 1:
-                    text = "type 1";
+                    text = "Structures gonflables";
                     break;
                 case 2:
-                    text = "type 2";
+                    text = "Mascottes";
                     break;
                 case 3:
-                    text = "type 3";
+                    text = "Jeux de kermesse";
                     break;
                 case 4:
-                    text = "type 4";
+                    text = "Appareils sucré salé";
+                    break;
+                case 5:
+                    text = "Pack";
+                    break;
+                case 6:
+                    text = "Animation";
                     break;
                 default:
                     text = null;
@@ -85,25 +63,6 @@ export let ProduitsComponent = {
             return text;
         }
 
-
-        setEditItem(item) {
-            this.itemToEdit = item;
-            item.isEditing = true;
-        }
-
-        deleteItem(item) {
-            console.log(item);
-            this.ApiService.callApi('DELETE', {
-                'table': 'produits',
-                'ID': item.ID
-            }).then((data) => {
-                console.log(data);
-                if (data != null) {
-                    console.log("item inséré");
-                    this.loadList();
-                }
-            });
-        }
 
         loadList(typeList) {
             let queryParams = {
