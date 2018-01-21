@@ -1,11 +1,11 @@
-import template from './packsAdmin.html';
+import template from './traiteurAdmin.html';
 
-export let PacksAdminComponent = {
+export let TraiteurAdminComponent = {
     templateUrl: template,
-    selector: 'packsAdmin',
+    selector: 'traiteurAdmin',
     bindings: {},
     /* @ngInject */
-    controller: class PacksAdminCtrl {
+    controller: class TraiteurAdminCtrl {
         /* @ngInject */
         constructor($state, $scope, ApiService, loginService) {
             // TODO - constructor arguments that should be available on "this"
@@ -15,7 +15,7 @@ export let PacksAdminComponent = {
             });
             this.loginService = loginService;
             if (!this.loginService.getLogged()) {
-                this.$state.go('packs', {
+                this.$state.go('traiteur', {
                     typeList: 0
                 });
             }
@@ -59,7 +59,7 @@ export let PacksAdminComponent = {
 
         addItem() {
             this.ApiService.callApi('POST', {
-                'table': 'packs'
+                'table': 'traiteur'
             }, this.itemToAdd).then((data) => {
                 console.log(data);
                 if (data != null) {
@@ -73,7 +73,7 @@ export let PacksAdminComponent = {
         editItem() {
             console.log(this.itemToEdit);
             this.ApiService.callApi('PUT', {
-                'table': 'packs',
+                'table': 'traiteur',
                 'ID': this.itemToEdit.ID
             }, this.itemToEdit).then((data) => {
                 if (data != null) {
@@ -93,7 +93,7 @@ export let PacksAdminComponent = {
         deleteItem(item) {
             console.log(item);
             this.ApiService.callApi('DELETE', {
-                'table': 'packs',
+                'table': 'traiteur',
                 'ID': item.ID
             }).then((data) => {
                 console.log(data);
@@ -106,9 +106,9 @@ export let PacksAdminComponent = {
 
         loadList() {
             this.ApiService.callApi('GET', {
-                'table': 'packs'
+                'table': 'traiteur'
             }).then((data) => {
-                this.listObjects = data.packs;
+                this.listObjects = data.traiteur;
             });
         }
     }

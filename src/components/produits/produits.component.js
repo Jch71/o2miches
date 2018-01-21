@@ -14,16 +14,6 @@ export let ProduitsComponent = {
                 $state
             });
             this.$stateParams = $stateParams;
-            this.listObjects = [{
-                id: 1,
-                text: "toto"
-            }, {
-                id: 2,
-                text: "titi"
-            }, {
-                id: 3,
-                text: "tutu"
-            }];
             this.itemToAdd = {};
             this.isAddingItem = true;
 

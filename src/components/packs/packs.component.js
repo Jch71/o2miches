@@ -18,37 +18,8 @@ export let PacksComponent = {
             this.isAddingItem = true;
 
             this.ApiService = ApiService;
-            this.loadList(this.$stateParams.minPrix);
+            this.loadList(this.$stateParams.minPrix,this.$stateParams.maxPrix);
 
-        }
-
-        addItem() {
-            this.ApiService.callApi('POST', {
-                'table': 'packs'
-            }, this.itemToAdd).then((data) => {
-                console.log(data);
-                if (data != null) {
-                    this.itemToAdd = {};
-                    this.loadList();
-                }
-            });
-        }
-
-
-        editItem() {
-            console.log(this.itemToEdit);
-            this.ApiService.callApi('PUT', {
-                'table': 'packs',
-                'ID': this.itemToEdit.ID
-            }, this.itemToEdit).then((data) => {
-
-                if (data != null) {
-                    this.itemToEdit = {};
-                    this.loadList();
-                    this.isAddingItem = true;
-                    this.isEditingItem = false;
-                }
-            });
         }
 
         getItemTypeText(type) {
@@ -80,31 +51,14 @@ export let PacksComponent = {
         }
 
 
-        setEditItem(item) {
-            this.itemToEdit = item;
-            item.isEditing = true;
-        }
-
-        deleteItem(item) {
-            console.log(item);
-            this.ApiService.callApi('DELETE', {
-                'table': 'packs',
-                'ID': item.ID
-            }).then((data) => {
-                console.log(data);
-                if (data != null) {
-                    console.log("item inséré");
-                    this.loadList();
-                }
-            });
-        }
-
-        loadList(minPrix) {
+        loadList(minPrix, maxPrix) {
             let queryParams = {
                 'table': 'packs'
             }
             if (minPrix != 0) {
-                queryParams.filter = minPrix
+                queryParams.filter = {'minPrix' : minPrix}
+                if (maxPrix != 0)
+                    queryParams.filter.maxPrix = maxPrix;
             }
 
             this.ApiService.callApi('GET', queryParams).then((data) => {

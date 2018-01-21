@@ -20,14 +20,45 @@ export let ProduitsAdminComponent = {
                 });
             }
             this.itemToAdd = {};
+             this.itemToEdit = {};
             this.isAddingItem = true;
 
             this.ApiService = ApiService;
             this.loadList();
 
+            $scope.$watch(() => {
+                return this.itemToAdd.image;
+            }, () => {
+                var reader = new FileReader();
+
+                reader.onload = (readerEvt) => {
+                    var binaryString = readerEvt.target.result;
+                    console.log(btoa(binaryString));
+                    this.itemToAdd.image_url = btoa(binaryString);
+                };
+
+                reader.readAsBinaryString(this.itemToAdd.image);
+
+            });
+
+            $scope.$watch(() => {
+                return this.itemToEdit.image;
+            }, () => {
+                var reader = new FileReader();
+
+                reader.onload = (readerEvt) => {
+                    var binaryString = readerEvt.target.result;
+                    console.log(btoa(binaryString));
+                    this.itemToEdit.image_url = btoa(binaryString);
+                };
+
+                reader.readAsBinaryString(this.itemToEdit.image);
+
+            });
+
         }
 
-          getItemTypeText(type) {
+        getItemTypeText(type) {
             let text;
             switch (type) {
                 case 1:
@@ -55,11 +86,12 @@ export let ProduitsAdminComponent = {
             return text;
         }
 
+
+
         addItem() {
             this.ApiService.callApi('POST', {
                 'table': 'produits'
             }, this.itemToAdd).then((data) => {
-                console.log(data);
                 if (data != null) {
                     this.itemToAdd = {};
                     this.loadList();
@@ -67,6 +99,9 @@ export let ProduitsAdminComponent = {
             });
         }
 
+        processImage() {
+            console.log(this.itemToEdit);
+        }
 
         editItem() {
             console.log(this.itemToEdit);

@@ -1,11 +1,8 @@
 <div class="list-produits">
     <ul>
         <li class="item-list-produits row" ng-repeat="item in $ctrl.listObjects">
-             <div class="item-type">
-                    {{$ctrl.getItemTypeText(item.type)}}
-                </div>
-                                    <div class="item-prix" ng-show="item.PRIX !==null">
-                        {{item.PRIX}}€
+                                <div class="item-prix" ng-show="item.prix !==null">
+                        {{item.prix}}€
                     </div>
             <div class="col-xs-12" ng-class="{'col-md-12':item.image_url=='', 'col-md-8':item.image_url!=''}">
                 <div>
@@ -19,7 +16,7 @@
                 <div class="item-description col-xs-12"  ng-class="{'col-md-12':item.image_url=='', 'col-md-8':item.image_url!=''}">
                     {{item.description}}
                 </div>
-               
+                
             </div>
         </li>
     </ul>

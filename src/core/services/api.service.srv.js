@@ -18,8 +18,10 @@ export default class ApiService {
             url += '?transform=1';
             if (params.filter != null && params.table =='produits')
                 url += '&filter=type,eq,' + params.filter + '';
-            if (params.filter != null && params.table =='packs')
-                url += '&filter=PRIX,ge,' + params.filter + '';
+            if (params.filter != null && params.table =='packs'){
+                url += '&filter=PRIX,bt,' + params.filter.minPrix + ',' + params.filter.maxPrix +'';
+            
+            }
         }
         if (method == 'DELETE' || method == 'PUT') {
             url += '/' + params.ID;

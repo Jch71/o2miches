@@ -19,25 +19,27 @@
         padding-left: 0;
         .item-list-produits {
             list-style: none;
-            margin: 5px 0;
+            margin: 5px 0 25px;
             border-radius: 10px;
             border: solid 1px lightgrey;
             padding: 5px;
             position: relative;
             background: #FDFDFD;
-            margin-bottom: 20px;
             .item-title {
                 font-weight: bold;
             }
+            h3{
+                margin-top: 10px;
+            }
             .item-type{
                 position: absolute;
-                top:0px;
+                top:-18px;
                 left: 5px;
                 color: #AAAAAA;
             }
             .item-prix{
-                position: absolute;
-                top: 19px;
+                position: absolute; 
+                top: 15px;
                 right : 10px;
                 font-size: 20px;
             }
